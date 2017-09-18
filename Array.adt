@@ -1,0 +1,17 @@
+adt Array
+  uses Any, Integer
+  defines Array<T: Any>
+  operations
+    new: Integer x T -/-> Array<T>
+    get: Array<T> x Integer -/-> T
+    put: Array<T> x Integer x T -/-> Array<T>
+    length: Array<T> ---> Integer
+  preconditions
+    new(n, t): 0 < n
+    get(a, i): 0 <= i < length(a)
+    put(a, i, t): 0 <= i < length(a)
+  axioms
+    get(new(n, t), i) = t
+    get(put(a, i, t), j) = (if i = j then t else get(a, j))
+    length(new(n, t)) = n
+    length(put(a, i, t)) = length(a)
