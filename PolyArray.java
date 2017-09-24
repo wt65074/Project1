@@ -173,22 +173,48 @@ public final class PolyArray {
         try {
             Array<Integer> a = new SimpleArray<>(0, INITIAL);
             assert false;
-        } catch (LengthException e) {
-            // passed the test, nothing to do
-        }
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new SimpleArray<>(-1, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new SimpleArray<>(-100, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
+
         // TODO the same for ListArray and SparseArray here
         try {
             Array<Integer> a = new ListArray<>(0, INITIAL);
             assert false;
-        } catch (LengthException e) {
-            // passed the test, nothing to do
-        }
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new ListArray<>(-1, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new ListArray<>(-100, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
+
         try {
             Array<Integer> a = new SparseArray<>(0, INITIAL);
             assert false;
-        } catch (LengthException e) {
-            // passed the test, nothing to do
-        }
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new SparseArray<>(-1, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
+
+        try {
+            Array<Integer> a = new SparseArray<>(-100, INITIAL);
+            assert false;
+        } catch (LengthException e) { }
     }
 
     // TODO more test cases for preconditions
