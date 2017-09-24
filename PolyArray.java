@@ -27,8 +27,22 @@ public final class PolyArray {
 
     private static void testPutLength(Array<Integer> a) {
         for (int i = 0; i < LENGTH; i++) {
-            a.put(i, 10);
+            a.put(i, INITIAL);
             assert a.length() == LENGTH;
+        }
+    }
+
+    private static void testPutGet(Array<Integer> a) {
+        for (int i = 0; i < LENGTH; i++) {
+            a.put(i, i);
+            assert a.get(i) == i;
+        }
+    }
+
+    private static void testPutGetOtherIndex(Array<Integer> a) {
+        for (int i = 0; i < LENGTH; i++) {
+            a.put(i, i);
+            assert a.get(i) != i+1;
         }
     }
 
@@ -170,6 +184,7 @@ public final class PolyArray {
     }
 
     private static void testNewWrongLength() {
+
         try {
             Array<Integer> a = new SimpleArray<>(0, INITIAL);
             assert false;
@@ -240,12 +255,15 @@ public final class PolyArray {
         for (Array<Integer> a: arrays) {
             testNewLength(a);
             testNewGet(a);
+            testPutGet(a);
+            testPutGetOtherIndex(a);
             // TODO call more test cases (hint: order matters)
         }
 
         // Test all the preconditions. Sadly we have to code each one of these
         // out manually, not even Java's reflection API would help...
         testNewWrongLength();
-        // TODO call more test cases
-    }
+        testWrongPutIndex();
+        testWrongGetIndex();
+        // TODO call more test cases    }
 }
