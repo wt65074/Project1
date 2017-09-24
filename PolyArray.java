@@ -30,6 +30,69 @@ public final class PolyArray {
     // methods for testing preconditions go here
     private static void testWrongGetIndex() {
 
+        Array<Integer> simpleA = new SimpleArray<>(LENGTH, INITIAL);
+        try {
+            simpleA.get(-1);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.get(-10);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.get(LENGTH);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.get(LENGTH + 10);
+            assert false;
+        } catch (IndexException e) { }
+
+        Array<Integer> listA = new ListArray<>(LENGTH, INITIAL);
+        try {
+            listA.get(-1);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.get(-10);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.get(LENGTH);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.get(LENGTH + 10);
+            assert false;
+        } catch (IndexException e) { }
+
+        Array<Integer> sparseA = new SparseArray<>(LENGTH, INITIAL);
+        try {
+            sparseA.get(-1);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.get(-10);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.get(LENGTH);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.get(LENGTH + 10);
+            assert false;
+        } catch (IndexException e) { }
+
     }
 
     private static void testWrongPutIndex() {
