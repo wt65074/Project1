@@ -213,6 +213,8 @@ public class SparseArray<T> implements Array<T> {
       }
 
       s.append("]");
+
+      return s.toString();
       
    }
 
