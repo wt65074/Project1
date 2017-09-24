@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * @param<T> Element tyle.
 */
 
-public class SparseArray<T> implements Arrray<T> {
+public class SparseArray<T> implements Array<T> {
 
    // A Node class to build our linked list from.
    // Nodes store their index and the data that
@@ -32,7 +32,7 @@ public class SparseArray<T> implements Arrray<T> {
 
    private Node<T> first;
    private int length;
-   private T default;
+   private T defaultValue;
 
    /** 
     * Create a new SparseArray.
@@ -42,12 +42,12 @@ public class SparseArray<T> implements Arrray<T> {
    */
    public SparseArray(int l, T d) throws LengthException {
       
-      if (n <= 0) {
+      if (l <= 0) {
          throw new LengthException();
       }
 
       length = l;
-      defualt = d;
+      defaultValue = d;
 
    }
 
@@ -77,23 +77,19 @@ public class SparseArray<T> implements Arrray<T> {
             // looking for is in between previous and next.
             // If first was null, we're just going to return null.
             return previousNode;
-
          }
 
          else if (index == currentNode.index) {
             // The current node is the node we were looking for
             // so we're going to the current node.
             return currentNode;
-
          }
 
          else {
-
             // We need to keep looking for the node or for the
             // correct place to place the node. 
             previousNode = currentNode;
             currentNode = previousNode.next;
-
          }
 
       }
@@ -106,7 +102,7 @@ public class SparseArray<T> implements Arrray<T> {
       Node<T> foundNode = findNodeOrPrevious(i);
 
       if (foundNode == null || foundNode.index != i) {
-         return this.defualt;
+         return this.defaultValue;
       }
 
       else {
@@ -122,21 +118,21 @@ public class SparseArray<T> implements Arrray<T> {
 
       if (foundNode == null) {
          // The first node is null
-         Node<T> newNode = new Node<>(value, index, null);
+         Node<T> newNode = new Node<>(t, i, null);
          this.first = newNode;
       }
 
       else if (foundNode.index != i) {
          // We found the node before the node we we're looking for.
          // We need to place a new node in the linked list.
-         Node<T> newNode = new Node<>(value, index, foundNode.next);
+         Node<T> newNode = new Node<>(t, i, foundNode.next);
          foundNode.next = newNode;
       }
 
       else {
          // The node we were looking for exists.
          // We jut have to change the node's data.
-         foundNode.data = value;
+         foundNode.data = t;
       }
 
    }
@@ -146,8 +142,50 @@ public class SparseArray<T> implements Arrray<T> {
       return this.length;
    }
 
+   // An iterator to traverse the array.
+   private final class ArrayIterator implements Iterator<T> {
 
+      Node<T> currentNode;
+      int currentIndex;
 
+      ArrayIterator() {
+         this.currentNode = SparseArray.this.first;
+         this.currentIndex = 0;
+      }
+
+      @Override
+      public T next() throws NoSuchElementException {
+
+         if (!this.hasNext()) {
+            throw new NoSuchElementException();
+         }
+
+         T toReturn;
+
+         if (this.currentNode == null) {
+            // We are at the end of the linked list, we can just return 
+            // default values until the end.
+            toReturn = SparseArray.this.defaultValue;
+         }
+         else if (this.currentNode.index == currentIndex) {
+            toReturn = this.currentNode.data;
+            this.currentNode = this.currentNode.next;
+         }
+         else {
+            toReturn = SparseArray.this.defaultValue;
+         }
+
+         this.currentIndex++;
+         return toReturn;
+
+      }
+
+      @Override
+      public boolean hasNext() {
+         return this.currentIndex < SparseArray.this.length();
+      }
+
+   }
 
 
 }
