@@ -142,10 +142,17 @@ public class SparseArray<T> implements Array<T> {
       return this.length;
    }
 
+   @Override
+   public Iterator<T> iterator() {
+      return new ArrayIterator();
+   }
+
    // An iterator to traverse the array.
    private final class ArrayIterator implements Iterator<T> {
 
+      // Current position in the linked list.
       Node<T> currentNode;
+      // Current index in the array.
       int currentIndex;
 
       ArrayIterator() {
@@ -168,13 +175,18 @@ public class SparseArray<T> implements Array<T> {
             toReturn = SparseArray.this.defaultValue;
          }
          else if (this.currentNode.index == currentIndex) {
+            // We are at the position in the linked list where the index is.
+            // Return the node's data, and move on to the next node.
             toReturn = this.currentNode.data;
             this.currentNode = this.currentNode.next;
          }
          else {
+            // The node we are at in the linked list does not have the index
+            // we are looking for. Return a default value.
             toReturn = SparseArray.this.defaultValue;
          }
 
+         // Increment the current index
          this.currentIndex++;
          return toReturn;
 
@@ -185,6 +197,23 @@ public class SparseArray<T> implements Array<T> {
          return this.currentIndex < SparseArray.this.length();
       }
 
+   }
+
+   @Override
+   public String toString() {
+
+      StringBuilder s = new StringBuilder();
+      s.append("[");
+
+      Node<T> currentNode = this.first;
+
+      for (T item: this) {
+         s.append(item);
+         s.append(", ");
+      }
+
+      s.append("]");
+      
    }
 
 
