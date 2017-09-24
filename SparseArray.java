@@ -30,7 +30,7 @@ public class SparseArray<T> implements Array<T> {
 
    }
 
-   private Node<T> first;
+   private Node<T> first = null;
    private int length;
    private T defaultValue;
 
@@ -68,7 +68,7 @@ public class SparseArray<T> implements Array<T> {
       }
 
       Node<T> currentNode = first;
-      Node<T> previousNode;
+      Node<T> previousNode = null;
 
       while (true) {
 

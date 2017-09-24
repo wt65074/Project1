@@ -28,6 +28,76 @@ public final class PolyArray {
     // TODO more test cases for axioms
 
     // methods for testing preconditions go here
+    private static void testWrongGetIndex() {
+
+    }
+
+    private static void testWrongPutIndex() {
+
+        Array<Integer> simpleA = new SimpleArray<>(LENGTH, INITIAL);
+        try {
+            simpleA.put(-1, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.put(-10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.put(LENGTH, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            simpleA.put(LENGTH + 10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        Array<Integer> listA = new ListArray<>(LENGTH, INITIAL);
+        try {
+            listA.put(-1, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.put(-10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.put(LENGTH, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            listA.put(LENGTH + 10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        Array<Integer> sparseA = new SparseArray<>(LENGTH, INITIAL);
+        try {
+            sparseA.put(-1, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.put(-10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.put(LENGTH, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+        try {
+            sparseA.put(LENGTH + 10, 0);
+            assert false;
+        } catch (IndexException e) { }
+
+    }
 
     private static void testNewWrongLength() {
         try {
@@ -37,6 +107,18 @@ public final class PolyArray {
             // passed the test, nothing to do
         }
         // TODO the same for ListArray and SparseArray here
+        try {
+            Array<Integer> a = new ListArray<>(0, INITIAL);
+            assert false;
+        } catch (LengthException e) {
+            // passed the test, nothing to do
+        }
+        try {
+            Array<Integer> a = new SparseArray<>(0, INITIAL);
+            assert false;
+        } catch (LengthException e) {
+            // passed the test, nothing to do
+        }
     }
 
     // TODO more test cases for preconditions
