@@ -265,5 +265,6 @@ public final class PolyArray {
         testNewWrongLength();
         testWrongPutIndex();
         testWrongGetIndex();
-        // TODO call more test cases    }
+        // TODO call more test cases    
+    }
 }

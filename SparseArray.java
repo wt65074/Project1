@@ -218,5 +218,18 @@ public class SparseArray<T> implements Array<T> {
       
    }
 
+   public static void main(String[] args) {
+
+      SparseArray<Integer> a = new SparseArray<Integer>(10, 10);
+      System.out.println(a.toString());
+
+      a.put(0, 22);
+      a.put(4, 2);
+      a.put(4, 16);
+
+      System.out.println(a.toString());
+
+   }
+
 
 }
