@@ -25,6 +25,13 @@ public final class PolyArray {
         }
     }
 
+    private static void testPutLength(Array<Integer> a) {
+        for (int i = 0; i < LENGTH; i++) {
+            a.put(i, 10);
+            assert a.length() == LENGTH;
+        }
+    }
+
     // TODO more test cases for axioms
 
     // methods for testing preconditions go here
