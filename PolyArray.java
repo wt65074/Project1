@@ -35,17 +35,13 @@ public final class PolyArray {
     private static void testPutGet(Array<Integer> a) {
         for (int i = 0; i < LENGTH; i++) {
             a.put(i, i);
+        }
+
+        for (int i = 0; i < LENGTH; i++) {
             assert a.get(i) == i;
         }
     }
 
-    private static void testPutGetOtherIndex(Array<Integer> a) {
-        for (int i = 0; i < LENGTH; i++) {
-            a.put(i, i);
-            assert a.get(i) != i+1;
-        }
-    }
-    
     // TODO more test cases for axioms
 
     // methods for testing preconditions go here
@@ -256,7 +252,7 @@ public final class PolyArray {
             testNewLength(a);
             testNewGet(a);
             testPutGet(a);
-            testPutGetOtherIndex(a);
+            testPutLength(a);
             // TODO call more test cases (hint: order matters)
         }
 
