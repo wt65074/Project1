@@ -48,7 +48,7 @@ public class SparseArray<T> implements Array<T> {
             throw new LengthException();
         }
 
-        length = l;
+        this.length = l;
         this.defaultValue = d;
 
     }
@@ -87,7 +87,7 @@ public class SparseArray<T> implements Array<T> {
                 return currentNode;
             } else {
                 // We need to keep looking for the node or for the
-                // correct place to place the node. 
+                // correct place to place the node.
                 previousNode = currentNode;
                 currentNode = previousNode.next;
             }
@@ -99,7 +99,7 @@ public class SparseArray<T> implements Array<T> {
     @Override
     public T get(int i) throws IndexException {
 
-        Node<T> foundNode = findNodeOrPrevious(i);
+        Node<T> foundNode = this.findNodeOrPrevious(i);
 
         if (foundNode == null || foundNode.index != i) {
             return this.defaultValue;
@@ -112,7 +112,7 @@ public class SparseArray<T> implements Array<T> {
     @Override
     public void put(int i, T t) throws IndexException {
 
-        Node<T> foundNode = findNodeOrPrevious(i);
+        Node<T> foundNode = this.findNodeOrPrevious(i);
 
         if (foundNode == null) {
             // The first node is null
@@ -164,10 +164,10 @@ public class SparseArray<T> implements Array<T> {
             T toReturn;
 
             if (this.currentNode == null) {
-                // We are at the end of the linked list, we can just return 
+                // We are at the end of the linked list, we can just return
                 // default values until the end.
                 toReturn = SparseArray.this.defaultValue;
-            } else if (this.currentNode.index == currentIndex) {
+            } else if (this.currentNode.index == this.currentIndex) {
                 // We are at the position in the linked list where the index is.
                 // Return the node's data, and move on to the next node.
                 toReturn = this.currentNode.data;
