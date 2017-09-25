@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * elements that have been modified in a linked
  * list.
  *
- * @param<T> Element tyle.
+ * @param <T> Element tyle.
 */
 public class SparseArray<T> implements Array<T> {
 
@@ -42,7 +42,7 @@ public class SparseArray<T> implements Array<T> {
      * @throws LengthException Throws an exception if the length is negative.
     */
     public SparseArray(int l, T d) throws LengthException {
-        
+        å
         if (l <= 0) {
             throw new LengthException();
         }
