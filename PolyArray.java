@@ -233,6 +233,14 @@ public final class PolyArray {
 
     // TODO more test cases for preconditions
 
+    private static void testIterator(Array<Integer> a) {
+        int index = 0;
+        for (Integer i: a) {
+            assert i == a.get(index);
+            index++;
+        }
+    }
+
     /**
      * Run (mostly polymorphic) tests on various array implementations.
      *
@@ -256,6 +264,7 @@ public final class PolyArray {
             testNewGet(a);
             testPutGet(a);
             testPutLength(a);
+            testIterator(a);
             // TODO call more test cases (hint: order matters)
         }
 

@@ -32,7 +32,7 @@ adt FlexibleArray
 	uses Any, Integer
 	defines FlexibleArray<T: Any>
 	operations: 
-		new: Integer x Integer x T -/> FlexibleArray<T>
+		new: Integer x Integer x T -/-> FlexibleArray<T>
 		get: FlexibleArray<T> x Integer -/-> T
 		put: FlexibleArray<T> x Integer x T -/-> T
 		length: FlexibleArray<T> ---> Integer
