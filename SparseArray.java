@@ -59,8 +59,8 @@ public class SparseArray<T> implements Array<T> {
      *
      * @param index The index to find in the list.
      * @return The node with the specified index, or, if that node does
-    * not exist return the node before the where we would expect the
-    * index to be. If no nodes are in the list, null is returned.
+        * not exist return the node before the where we would expect the
+        * index to be. If no nodes are in the list, null is returned.
      * @throws IndexException Throws an exception if the index is out of bounds.
      *
     */
