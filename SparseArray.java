@@ -3,11 +3,11 @@ import java.util.NoSuchElementException;
 
 /**
  * Implementation of SparseArray for Project 1.
- * 
+ *
  * Sparse array stores only information about
  * elements that have been modified in a linked
  * list.
- * 
+ *
  * @param<T> Element tyle.
 */
 
@@ -34,11 +34,13 @@ public class SparseArray<T> implements Array<T> {
     private int length;
     private T defaultValue;
 
-    /** 
+    /**
      * Create a new SparseArray.
      *
      * @param l The length of the array.
      * @param d The default, unmodified value for the elements in the array.
+     *
+     * @throws LengthException Throws an exception if the length is negative.
     */
     public SparseArray(int l, T d) throws LengthException {
         
@@ -47,7 +49,7 @@ public class SparseArray<T> implements Array<T> {
         }
 
         length = l;
-        defaultValue = d;
+        this.defaultValue = d;
 
     }
 
@@ -60,6 +62,8 @@ public class SparseArray<T> implements Array<T> {
      * @return The node with the specified index, or, if that node does
      * not exist return the node before the where we would expect the
      * index to be. If no nodes are in the list, null is returned.
+     * @throws IndexException Throws an exception if the index is out of bounds.
+     *
      */
     private Node<T> findNodeOrPrevious(int index) throws IndexException {
 
