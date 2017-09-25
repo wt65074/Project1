@@ -29,7 +29,7 @@ public class SparseArray<T> implements Array<T> {
 
     }
 
-    private Node<T> first = null;
+    private Node<T> first;
     private int length;
     private T defaultValue;
 
@@ -63,7 +63,7 @@ public class SparseArray<T> implements Array<T> {
      * index to be. If no nodes are in the list, null is returned.
      * @throws IndexException Throws an exception if the index is out of bounds.
      *
-     */
+    */
     private Node<T> findNodeOrPrevious(int index) throws IndexException {
 
         if (index < 0 || index >= this.length()) {
