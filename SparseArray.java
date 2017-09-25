@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * in situations where a large number of elements
  * in the array will remain mostly unchanged throughout
  * the arrays lifetime. This array does not make very much
- * sense to use for a small number of elements or 
+ * sense to use for a small number of elements or
  * for a array of elements in which many elements are
  * going to be changed.
  *
