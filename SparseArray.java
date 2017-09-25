@@ -63,7 +63,7 @@ public class SparseArray<T> implements Array<T> {
 
     /**
      * Find the node with the specified index, or, if that node does
-     * not exist return the node before the where we would expect the
+     * not exist return the node before where we would expect the
      * index to be. If no nodes are in the list, null is returned.
      *
      * @param index The index to find in the list.
@@ -85,8 +85,8 @@ public class SparseArray<T> implements Array<T> {
         while (true) {
 
             if (currentNode == null || index < currentNode.index) {
-                // Reached the end of the list for the node we are
-                // looking for is in between previous and next.
+                // Reached the end of the list or the node we are 
+                // looking for is in between previous and current.
                 // If first was null, we're just going to return null.
                 return previousNode;
             } else if (index == currentNode.index) {
