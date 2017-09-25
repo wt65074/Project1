@@ -85,7 +85,7 @@ public class SparseArray<T> implements Array<T> {
         while (true) {
 
             if (currentNode == null || index < currentNode.index) {
-                // Reached the end of the list or the node we are 
+                // Reached the end of the list or the node we are
                 // looking for is in between previous and current.
                 // If first was null, we're just going to return null.
                 return previousNode;
