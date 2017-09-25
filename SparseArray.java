@@ -13,223 +13,223 @@ import java.util.NoSuchElementException;
 
 public class SparseArray<T> implements Array<T> {
 
-   // A Node class to build our linked list from.
-   // Nodes store their index and the data that
-   // has been changed at that index. 
-   private static final class Node<T> {
+    // A Node class to build our linked list from.
+    // Nodes store their index and the data that
+    // has been changed at that index. 
+    private static final class Node<T> {
 
-      T data;
-      int index;
-      Node<T> next;
+        T data;
+        int index;
+        Node<T> next;
 
-      Node(T t, int index, Node<T> n) {
-         this.data = t;
-         this.index = index;
-         this.next = n;
-      }
+        Node(T t, int index, Node<T> n) {
+            this.data = t;
+            this.index = index;
+            this.next = n;
+        }
 
-   }
+    }
 
-   private Node<T> first = null;
-   private int length;
-   private T defaultValue;
+    private Node<T> first = null;
+    private int length;
+    private T defaultValue;
 
-   /** 
-    * Create a new SparseArray.
-    *
-    * @param l The length of the array.
-    * @param d The default, unmodified value for the elements in the array.
-   */
-   public SparseArray(int l, T d) throws LengthException {
-      
-      if (l <= 0) {
-         throw new LengthException();
-      }
-
-      length = l;
-      defaultValue = d;
-
-   }
-
-   /**
-    * Find the node with the specified index, or, if that node does
-    * not exist return the node before the where we would expect the
-    * index to be. If no nodes are in the list, null is returned.
-    *
-    * @param index The index to find in the list.
-    * @return The node with the specified index, or, if that node does
-    * not exist return the node before the where we would expect the
-    * index to be. If no nodes are in the list, null is returned.
+    /** 
+     * Create a new SparseArray.
+     *
+     * @param l The length of the array.
+     * @param d The default, unmodified value for the elements in the array.
     */
-   private Node<T> findNodeOrPrevious(int index) throws IndexException {
+    public SparseArray(int l, T d) throws LengthException {
+        
+        if (l <= 0) {
+            throw new LengthException();
+        }
 
-      if (index < 0 || index >= this.length()) {
-         throw new IndexException();
-      }
+        length = l;
+        defaultValue = d;
 
-      Node<T> currentNode = first;
-      Node<T> previousNode = null;
+    }
 
-      while (true) {
+    /**
+     * Find the node with the specified index, or, if that node does
+     * not exist return the node before the where we would expect the
+     * index to be. If no nodes are in the list, null is returned.
+     *
+     * @param index The index to find in the list.
+     * @return The node with the specified index, or, if that node does
+     * not exist return the node before the where we would expect the
+     * index to be. If no nodes are in the list, null is returned.
+     */
+    private Node<T> findNodeOrPrevious(int index) throws IndexException {
 
-         if (currentNode == null || index < currentNode.index) {
-            // Reached the end of the list for the node we are
-            // looking for is in between previous and next.
-            // If first was null, we're just going to return null.
-            return previousNode;
-         }
+        if (index < 0 || index >= this.length()) {
+            throw new IndexException();
+        }
 
-         else if (index == currentNode.index) {
-            // The current node is the node we were looking for
-            // so we're going to the current node.
-            return currentNode;
-         }
+        Node<T> currentNode = first;
+        Node<T> previousNode = null;
 
-         else {
-            // We need to keep looking for the node or for the
-            // correct place to place the node. 
-            previousNode = currentNode;
-            currentNode = previousNode.next;
-         }
+        while (true) {
 
-      }
+            if (currentNode == null || index < currentNode.index) {
+                // Reached the end of the list for the node we are
+                // looking for is in between previous and next.
+                // If first was null, we're just going to return null.
+                return previousNode;
+            }
 
-   }
+            else if (index == currentNode.index) {
+                // The current node is the node we were looking for
+                // so we're going to the current node.
+                return currentNode;
+            }
 
-   @Override
-   public T get(int i) throws IndexException {
+            else {
+                // We need to keep looking for the node or for the
+                // correct place to place the node. 
+                previousNode = currentNode;
+                currentNode = previousNode.next;
+            }
 
-      Node<T> foundNode = findNodeOrPrevious(i);
+        }
 
-      if (foundNode == null || foundNode.index != i) {
-         return this.defaultValue;
-      }
+    }
 
-      else {
-         return foundNode.data;
-      }
+    @Override
+    public T get(int i) throws IndexException {
 
-   }
+        Node<T> foundNode = findNodeOrPrevious(i);
 
-   @Override
-   public void put(int i, T t) throws IndexException {
+        if (foundNode == null || foundNode.index != i) {
+            return this.defaultValue;
+        }
 
-      Node<T> foundNode = findNodeOrPrevious(i);
+        else {
+            return foundNode.data;
+        }
 
-      if (foundNode == null) {
-         // The first node is null
-         Node<T> newNode = new Node<>(t, i, null);
-         this.first = newNode;
-      }
+    }
 
-      else if (foundNode.index != i) {
-         // We found the node before the node we we're looking for.
-         // We need to place a new node in the linked list.
-         Node<T> newNode = new Node<>(t, i, foundNode.next);
-         foundNode.next = newNode;
-      }
+    @Override
+    public void put(int i, T t) throws IndexException {
 
-      else {
-         // The node we were looking for exists.
-         // We jut have to change the node's data.
-         foundNode.data = t;
-      }
+        Node<T> foundNode = findNodeOrPrevious(i);
 
-   }
+        if (foundNode == null) {
+            // The first node is null
+            Node<T> newNode = new Node<>(t, i, null);
+            this.first = newNode;
+        }
 
-   @Override
-   public int length() {
-      return this.length;
-   }
+        else if (foundNode.index != i) {
+            // We found the node before the node we we're looking for.
+            // We need to place a new node in the linked list.
+            Node<T> newNode = new Node<>(t, i, foundNode.next);
+            foundNode.next = newNode;
+        }
 
-   @Override
-   public Iterator<T> iterator() {
-      return new ArrayIterator();
-   }
+        else {
+            // The node we were looking for exists.
+            // We jut have to change the node's data.
+            foundNode.data = t;
+        }
 
-   // An iterator to traverse the array.
-   private final class ArrayIterator implements Iterator<T> {
+    }
 
-      // Current position in the linked list.
-      Node<T> currentNode;
-      // Current index in the array.
-      int currentIndex;
+    @Override
+    public int length() {
+        return this.length;
+    }
 
-      ArrayIterator() {
-         this.currentNode = SparseArray.this.first;
-         this.currentIndex = 0;
-      }
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayIterator();
+    }
 
-      @Override
-      public T next() throws NoSuchElementException {
+    // An iterator to traverse the array.
+    private final class ArrayIterator implements Iterator<T> {
 
-         if (!this.hasNext()) {
-            throw new NoSuchElementException();
-         }
+        // Current position in the linked list.
+        Node<T> currentNode;
+        // Current index in the array.
+        int currentIndex;
 
-         T toReturn;
+        ArrayIterator() {
+            this.currentNode = SparseArray.this.first;
+            this.currentIndex = 0;
+        }
 
-         if (this.currentNode == null) {
-            // We are at the end of the linked list, we can just return 
-            // default values until the end.
-            toReturn = SparseArray.this.defaultValue;
-         }
-         else if (this.currentNode.index == currentIndex) {
-            // We are at the position in the linked list where the index is.
-            // Return the node's data, and move on to the next node.
-            toReturn = this.currentNode.data;
-            this.currentNode = this.currentNode.next;
-         }
-         else {
-            // The node we are at in the linked list does not have the index
-            // we are looking for. Return a default value.
-            toReturn = SparseArray.this.defaultValue;
-         }
+        @Override
+        public T next() throws NoSuchElementException {
 
-         // Increment the current index
-         this.currentIndex++;
-         return toReturn;
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
 
-      }
+            T toReturn;
 
-      @Override
-      public boolean hasNext() {
-         return this.currentIndex < SparseArray.this.length();
-      }
+            if (this.currentNode == null) {
+                // We are at the end of the linked list, we can just return 
+                // default values until the end.
+                toReturn = SparseArray.this.defaultValue;
+            }
+            else if (this.currentNode.index == currentIndex) {
+                // We are at the position in the linked list where the index is.
+                // Return the node's data, and move on to the next node.
+                toReturn = this.currentNode.data;
+                this.currentNode = this.currentNode.next;
+            }
+            else {
+                // The node we are at in the linked list does not have the index
+                // we are looking for. Return a default value.
+                toReturn = SparseArray.this.defaultValue;
+            }
 
-   }
+            // Increment the current index
+            this.currentIndex++;
+            return toReturn;
 
-   @Override
-   public String toString() {
+        }
 
-      StringBuilder s = new StringBuilder();
-      s.append("[");
+        @Override
+        public boolean hasNext() {
+            return this.currentIndex < SparseArray.this.length();
+        }
 
-      Node<T> currentNode = this.first;
+    }
 
-      for (T item: this) {
-         s.append(item);
-         s.append(", ");
-      }
+    @Override
+    public String toString() {
 
-      s.append("]");
+        StringBuilder s = new StringBuilder();
+        s.append("[");
 
-      return s.toString();
-      
-   }
+        Node<T> currentNode = this.first;
 
-   public static void main(String[] args) {
+        for (T item: this) {
+            s.append(item);
+            s.append(", ");
+        }
 
-      SparseArray<Integer> a = new SparseArray<Integer>(10, 10);
-      System.out.println(a.toString());
+        s.append("]");
 
-      a.put(0, 22);
-      a.put(4, 2);
-      a.put(4, 16);
+        return s.toString();
+        
+    }
 
-      System.out.println(a.toString());
+    public static void main(String[] args) {
 
-   }
+        SparseArray<Integer> a = new SparseArray<Integer>(10, 10);
+        System.out.println(a.toString());
+
+        a.put(0, 22);
+        a.put(4, 2);
+        a.put(4, 16);
+
+        System.out.println(a.toString());
+
+    }
 
 
 }
