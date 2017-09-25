@@ -1,3 +1,6 @@
+// Will Tobey
+// wtobey1@jhu.edu
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

@@ -16,7 +16,6 @@ adt UglyArray
 		put(a, i, t): 0 <= i < length(a)
 		empty(a, i): 0 <= i < length(a)
 	axioms
-		get(new(n), i) = None ????
 		empty(new(n), i) = True
 		get(put(a, i, t), j) = (if i = j, then t, else get(a, j))
 		length(new(n, t)) = n
@@ -47,7 +46,7 @@ adt FlexibleArray
 		length(put(a, i, t)) = length(a)
 		lower(put(a, i, t)) = lower(a)
 
-The difference between the FlexibleArray and a regular array is simply the ability to specify the bounds the user wants for the array, instad of the bounds being 0 to lenght - 1. FlexibleArray adds an extra layer of confusion to the Array class, and I would perfer to simply have an array. The confusion that FlexibleArray adds is not worth its functionality, which is easily achieved by simply converting the values from the indicies you want to use to a range from 0 to length - 1. All this would entail is subtraction.
+The difference between the FlexibleArray and a regular array is simply the ability to specify the bounds the user wants for the array, instead of the bounds being 0 to length - 1. FlexibleArray adds an extra layer of confusion to the Array class, and I would perfer to simply have an array. The confusion that FlexibleArray adds is not worth its functionality, which is easily achieved by using a function to convert the values from the indicies you want to use to a range from 0 to length - 1. In most situations, this extra function will better than using FlexibleArrays for everything and having to deal with their strange bounds, because in most cases a regular array will work just fine.
 
 
 

@@ -1,3 +1,6 @@
+// Will Tobey
+// wtobey1@jhu.edu
+
 import java.util.ArrayList; // see note in main() below
 
 /**
