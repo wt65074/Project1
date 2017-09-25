@@ -24,7 +24,7 @@ adt UglyArray
 		length(new(n, t)) = n
 		length(put(a, i, t)) = length(a)
 
-The most basic difference between UglyArray and Array are that there is no default value for the elements of the array. Instead of returning a default value, trying to retrieve a value from an array at a position that is not set will return some implementation specific value indicating it is empty (this can be specific to the type of the array). In a programming language, neither of these is perfect. It would be optimal to have an array that has an initialization for both an empty array and one filled with a specific value.
+The most basic difference between UglyArray and Array are that there is no default value for the elements of the array. Instead of returning a default value, trying to retrieve a value from an array at a position that is not set will cause an exception to be raised. In a programming language, neither of these is perfect. It would be optimal to have an array that has an initialization for both an empty array and one filled with a specific value.
 
 Problem 2:
 
