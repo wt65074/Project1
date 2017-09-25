@@ -45,7 +45,6 @@ public final class PolyArray {
             assert a.get(i) != i+1;
         }
     }
-
     // TODO more test cases for axioms
 
     // methods for testing preconditions go here
