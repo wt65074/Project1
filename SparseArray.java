@@ -6,7 +6,13 @@ import java.util.NoSuchElementException;
  *
  * Sparse array stores only information about
  * elements that have been modified in a linked
- * list.
+ * list. This data type is better than a SimpleArray
+ * in situations where a large number of elements
+ * in the array will remain mostly unchanged throughout
+ * the arrays lifetime. This array does not make very much
+ * sense to use for a small number of elements or 
+ * for a array of elements in which many elements are
+ * going to be changed.
  *
  * @param <T> Element tyle.
 */
@@ -198,9 +204,18 @@ public class SparseArray<T> implements Array<T> {
 
         Node<T> currentNode = this.first;
 
+        int index = 0;
+
         for (T item: this) {
+
             s.append(item);
-            s.append(", ");
+
+            if (index < this.length - 1) {
+                s.append(", ");
+            }
+
+            index++;
+
         }
 
         s.append("]");
