@@ -10,12 +10,11 @@ import java.util.NoSuchElementException;
  *
  * @param<T> Element tyle.
 */
-
 public class SparseArray<T> implements Array<T> {
 
     // A Node class to build our linked list from.
     // Nodes store their index and the data that
-    // has been changed at that index. 
+    // has been changed at that index.
     private static final class Node<T> {
 
         T data;
@@ -71,7 +70,7 @@ public class SparseArray<T> implements Array<T> {
             throw new IndexException();
         }
 
-        Node<T> currentNode = first;
+        Node<T> currentNode = this.first;
         Node<T> previousNode = null;
 
         while (true) {
@@ -207,7 +206,7 @@ public class SparseArray<T> implements Array<T> {
         s.append("]");
 
         return s.toString();
-        
+
     }
 
 }
